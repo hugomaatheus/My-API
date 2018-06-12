@@ -13,7 +13,7 @@ module Api
       end
 
       def create
-        article = Article.new(params.permit(:title, :abstract))        
+        article = Article.new(params.permit(:title, :abstract))
         author = Author.find(params[:author_id])
         article.authors << author
         if article.save
@@ -25,7 +25,9 @@ module Api
 
       def update
         article = Article.find(params[:id])
-        if article.update_attributes(article_params)
+        author = Author.find(params[:author_id])
+        article.authors << author
+        if article.update_attributes(params.permit(:title, :abstract))
           render json: {status: 'HELLYEAH', message:'Artigo atualizado', data:article}, status: :ok
         else
           render json: {status: 'ERROR', message:'Artigo não pôde ser atualizado', data:article.errors}, status: :unprocessable_entity
