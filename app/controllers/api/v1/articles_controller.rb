@@ -9,7 +9,7 @@ module Api
 
       def show
         article = Article.find(params[:id])
-        render json: {status: 'HELLYEAH', message:'Artigo encontrado', data:articles}, status: :ok
+        render json: {status: 'HELLYEAH', message:'Artigo encontrado', data:article}, status: :ok
       end
 
       def create
@@ -27,6 +27,7 @@ module Api
         article = Article.find(params[:id])
         author = Author.find(params[:author_id])
         article.authors << author
+
         if article.update_attributes(params.permit(:title, :abstract))
           render json: {status: 'HELLYEAH', message:'Artigo atualizado', data:article}, status: :ok
         else
