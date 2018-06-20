@@ -3,12 +3,13 @@ module Api
     class AuthorsController < ApplicationController
 
       def index
-        authors = Author.order('created_at DESC')
+        authors = Author.filter(params.slice(:by_m_name))
         render json: {status: 'HELLYEAH', message:'Autores carregados', data:authors}, status: :ok
       end
 
       def show
-        author = Author.find(params[:id])
+        busca = params[:id].present?
+        author = Author.search(busca)
         render json: {status: 'HELLYEAH', message:'Autor encontrado', data:author}, status: :ok
       end
 

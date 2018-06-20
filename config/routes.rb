@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
       resources :authors
+      get "authors/search/:term", to: "authors#search"
       resources :books
-      resources :articles  
+      resources :articles
+      resources :citations
     end
 
   end
