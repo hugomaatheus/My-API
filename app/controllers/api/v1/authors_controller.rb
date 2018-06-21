@@ -8,8 +8,7 @@ module Api
       end
 
       def show
-        busca = params[:id].present?
-        author = Author.search(busca)
+        author = Author.find(params[:id])
         render json: {status: 'HELLYEAH', message:'Autor encontrado', data:author}, status: :ok
       end
 
