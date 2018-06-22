@@ -3,10 +3,12 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      resources :authors      
+      resources :authors
       resources :books
       resources :articles
       resources :citations
+
+      get 'search', to: 'search#index'
     end
 
   end

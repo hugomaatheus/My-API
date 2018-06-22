@@ -14,7 +14,7 @@ module Api
 
       def create
         author = Author.new(author_params)
-        if author.save
+        if author.save          
           render json: {status: 'HELLYEAH', message:'Autor criado', data:author}, status: :ok
         else
           render json: {status: 'ERROR', message:'Autor não pôde ser criado', data:author.errors}, status: :unprocessable_entity

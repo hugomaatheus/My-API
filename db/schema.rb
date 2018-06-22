@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20180612215443) do
   end
 
   create_table "citations", force: :cascade do |t|
-    t.string "m_type"
+    t.string "my_type"
     t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

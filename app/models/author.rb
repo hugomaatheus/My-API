@@ -16,4 +16,25 @@ class Author < ApplicationRecord
 
   scope :by_m_name, -> (name) {where("name like ?", "#{name}%")}
 
+  def as_indexed_json(options = {})
+    self.as_json({
+        "name" => name,
+        "age" => age
+      })
+  end
+
+  def self.search(query)
+    __elasticsearch__.search(
+      {
+        query: {
+          multi_match: {
+            query: query,
+            fields: ['name']
+          }
+        }
+      }
+    )
+  end
+
 end
+Author.import force: true
